@@ -3,9 +3,13 @@ from sys import argv
 import requests, urllib
 
 query = argv[1]
-
 headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
-url = 'http://www.biblegateway.com/passage/?search=%s&version=RVR1960' % (urllib.parse.quote_plus(query))
+
+if len(argv) == 3:
+    version = argv[2]
+    url = 'http://www.biblegateway.com/passage/?search=%s&version=%s' % (urllib.parse.quote_plus(query), version)
+else:
+    url = 'http://www.biblegateway.com/passage/?search=%s&version=RVR1960' % (urllib.parse.quote_plus(query))
 
 def print_info(container):
     for child in container:
